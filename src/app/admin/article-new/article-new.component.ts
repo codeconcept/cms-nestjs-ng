@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ArticleService } from '../article.service';
 
 @Component({
   selector: 'app-article-new',
@@ -8,26 +9,29 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class ArticleNewComponent implements OnInit {
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private articleService: ArticleService) { }
 
   articleForm: FormGroup = this.fb.group({
-    articleTitle: ['', Validators.required],
-    articleContent: ['', [Validators.required, Validators.minLength(4)]]
+    title: ['', Validators.required],
+    content: ['', [Validators.required, Validators.minLength(4)]]
   });
+
+  response$ = null;
 
   ngOnInit() {
   }
 
-  get articleTitle() {
-    return this.articleForm.get('articleTitle');
+  get title() {
+    return this.articleForm.get('title');
   }
 
-  get articleContent() {
-    return this.articleForm.get('articleContent');
+  get content() {
+    return this.articleForm.get('content');
   }
 
-  submit() {
+  async submit() {
     console.log('article / submit', this.articleForm.value);
+    this.response$ = await this.articleService.createArticle(this.articleForm.value);
   }
 
 }
