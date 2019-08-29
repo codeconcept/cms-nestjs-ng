@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-article-new',
@@ -11,11 +11,19 @@ export class ArticleNewComponent implements OnInit {
   constructor(private fb: FormBuilder) { }
 
   articleForm: FormGroup = this.fb.group({
-    articleTitle: [''],
-    articleContent: ['']
+    articleTitle: ['', Validators.required],
+    articleContent: ['', [Validators.required, Validators.minLength(4)]]
   });
 
   ngOnInit() {
+  }
+
+  get articleTitle() {
+    return this.articleForm.get('articleTitle');
+  }
+
+  get articleContent() {
+    return this.articleForm.get('articleContent');
   }
 
   submit() {

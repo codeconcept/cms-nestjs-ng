@@ -2,22 +2,32 @@
 <form [formGroup]="articleForm" (ngSubmit)="submit()">
   <div class="form-group">
     <label for="exampleFormControlInput1">Article title</label>
-    <input type="text"
-      formControlName="articleTitle"
-      class="form-control"
-      id="articleTitle"
+    <input type="text" formControlName="articleTitle" class="form-control" id="articleTitle" required
       placeholder="article title">
+    <div
+      *ngIf="articleTitle.invalid && (articleTitle.dirty || articleTitle.touched)"
+      class="alert alert-danger">
+      Article title is required.
+    </div>
   </div>
   <div class="form-group">
     <label for="articleContent">Article content</label>
-    <textarea
-      formControlName="articleContent"
-      class="form-control"
-      id="articleContent"
-      rows="3">
+    <textarea formControlName="articleContent" class="form-control" id="articleContent" rows="3" required>
     </textarea>
+    <div
+      *ngIf="articleContent.errors && (articleContent?.errors['required'] !== null) && (articleContent.dirty || articleContent.touched)"
+      class="alert alert-danger">
+      Article content is required.
+    </div>
+    <div
+      *ngIf="articleContent.errors && articleContent?.errors['minlength'] && (articleContent.dirty ||
+      articleContent.touched)"
+      class="alert alert-danger">
+      Article content is too short (min 4 caracters).
+    </div>
   </div>
   <div class="form-group">
-    <button>create article</button>
+    <button [disabled]="articleForm.pristine || !this.articleForm.valid">create article</button>
   </div>
 </form>
+
