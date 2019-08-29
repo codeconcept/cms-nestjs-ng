@@ -1,0 +1,23 @@
+<h3>Create new article</h3>
+<form [formGroup]="articleForm" (ngSubmit)="submit()">
+  <div class="form-group">
+    <label for="exampleFormControlInput1">Article title</label>
+    <input type="text"
+      formControlName="articleTitle"
+      class="form-control"
+      id="articleTitle"
+      placeholder="article title">
+  </div>
+  <div class="form-group">
+    <label for="articleContent">Article content</label>
+    <textarea
+      formControlName="articleContent"
+      class="form-control"
+      id="articleContent"
+      rows="3">
+    </textarea>
+  </div>
+  <div class="form-group">
+    <button>create article</button>
+  </div>
+</form>
