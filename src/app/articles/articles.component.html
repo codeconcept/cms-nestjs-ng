@@ -1,7 +1,3 @@
-<p>articles works!</p>
-
-<div *ngIf="articles$">
-  <ul>
-    <li *ngFor="let article of articles$ | async">{{article.title}}</li>
-  </ul>
+<div *ngIf="articles$" class="d-flex flex-column bd-highlight mb-3">
+  <app-article-summary *ngFor="let article of articles$ | async" [article]="article"></app-article-summary>
 </div>
