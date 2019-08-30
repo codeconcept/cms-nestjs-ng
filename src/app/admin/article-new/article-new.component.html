@@ -34,3 +34,10 @@
 <div *ngIf="(response$ | async) as res">
   {{res | json}}
 </div>
+
+<div *ngIf="error" class="alert alert-danger">
+  An error occured. Please try again later.
+  <br>
+  <hr>
+  {{error | json}}
+</div>
