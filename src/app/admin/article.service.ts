@@ -19,7 +19,6 @@ export class ArticleService {
 
   updateArticle(articleId, article: Article) {
     const fullUrl = `${this.baseURL}/${articleId}`;
-    console.log(article);
     return this.httpClient.put<Article>(fullUrl, article, this.httpHeaders);
   }
 

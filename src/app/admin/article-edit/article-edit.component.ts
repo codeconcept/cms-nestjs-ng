@@ -1,8 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Article } from 'src/app/models/article';
 import { ArticleService } from '../article.service';
-import { catchError } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { EMPTY } from 'rxjs';
 
 @Component({
@@ -15,6 +15,7 @@ export class ArticleEditComponent implements OnInit {
   articleForm: FormGroup;
   response$ = null;
   error = null;
+  @Output() articleUpdate: EventEmitter<Article> = new EventEmitter();
 
   constructor(private fb: FormBuilder, private articleService: ArticleService) { }
 
@@ -36,8 +37,10 @@ export class ArticleEditComponent implements OnInit {
 
   async submit() {
     this.error = null;
-    this.response$ = await this.articleService.updateArticle(this.article._id, this.articleForm.value)
+    this.response$ = await this.articleService
+      .updateArticle(this.article._id, this.articleForm.value)
       .pipe(
+        tap(updatedArticle => this.articleUpdate.emit(updatedArticle)),
         catchError(error => {
           this.error = error;
           return EMPTY;

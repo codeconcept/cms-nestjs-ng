@@ -41,8 +41,13 @@ export class ArticleSummaryComponent implements OnInit {
       );
   }
 
-  update(article) {
+  toggleReadMode() {
+    this.isInEditMode = !this.isInEditMode;
+  }
+
+  reloadArticle(article: Article) {
     console.log(article);
+    this.article = article;
   }
 
   handleError(err) {
