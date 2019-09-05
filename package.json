@@ -1,6 +1,9 @@
 {
   "name": "cms-nestjs-ng",
   "version": "0.0.0",
+  "description": "App illustrating Angular course",
+  "author": "EURL Code Concept",
+  "license": "UNLICENSED",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
