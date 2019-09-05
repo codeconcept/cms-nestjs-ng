@@ -13,6 +13,7 @@ export class ArticleSummaryComponent implements OnInit {
   @Input() article: Article;
   isWaitingForServerResponse = false;
   error = null;
+  isInEditMode = false;
 
   constructor(private articleService: ArticleService) { }
 
@@ -38,6 +39,10 @@ export class ArticleSummaryComponent implements OnInit {
           this.handleError(err);
         }
       );
+  }
+
+  update(article) {
+    console.log(article);
   }
 
   handleError(err) {

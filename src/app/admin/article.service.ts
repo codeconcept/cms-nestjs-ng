@@ -17,6 +17,12 @@ export class ArticleService {
     return this.httpClient.post<Article>(this.baseURL, article);
   }
 
+  updateArticle(articleId, article: Article) {
+    const fullUrl = `${this.baseURL}/${articleId}`;
+    console.log(article);
+    return this.httpClient.put<Article>(fullUrl, article, this.httpHeaders);
+  }
+
   deleteArticle(article: Article) {
     const fullURL = `${this.baseURL}/${article._id}`;
     return this.httpClient.delete<Article>(fullURL, this.httpHeaders);
