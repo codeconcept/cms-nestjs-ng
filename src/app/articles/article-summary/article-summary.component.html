@@ -6,8 +6,10 @@
       <div class="mb-1 text-muted">{{article.creationDate}}</div>
       <p class="card-text mb-auto">{{article.content}}</p>
       <a href="#" class="stretched-link">Continue reading</a>
-      <button class="stretched-link btn btn-warning" (click)="toggleReadMode()">Update article</button>
-      <button class="stretched-link btn btn-danger" (click)="delete(article)">Delete article</button>
+      <button class="stretched-link btn btn-warning" (click)="toggleReadMode()" *ngIf="authService.isAdmin">Update
+        article</button>
+      <button class="stretched-link btn btn-danger" (click)="delete(article)" *ngIf="authService.isAdmin">Delete
+        article</button>
       <span *ngIf="isWaitingForServerResponse">please wait...</span>
       <div *ngIf="error">{{error | json}}</div>
     </div>

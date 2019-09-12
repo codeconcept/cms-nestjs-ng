@@ -3,6 +3,7 @@ import { Article } from 'src/app/models/article';
 import { ArticleService } from 'src/app/admin/article.service';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-article-summary',
@@ -15,7 +16,7 @@ export class ArticleSummaryComponent implements OnInit {
   error = null;
   isInEditMode = false;
 
-  constructor(private articleService: ArticleService) { }
+  constructor(private articleService: ArticleService, public authService: AuthService) { }
 
   ngOnInit() {
   }
