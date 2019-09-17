@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Article } from 'src/app/models/article';
 import { ArticleService } from 'src/app/admin/article.service';
 import { catchError } from 'rxjs/operators';
@@ -15,6 +15,7 @@ export class ArticleSummaryComponent implements OnInit {
   isWaitingForServerResponse = false;
   error = null;
   isInEditMode = false;
+  @Output() deleteSuccess = new EventEmitter<boolean>();
 
   constructor(private articleService: ArticleService, public authService: AuthService) { }
 
@@ -59,6 +60,8 @@ export class ArticleSummaryComponent implements OnInit {
 
   handleSuccess(data) {
     console.log('success !!', data);
+    this.deleteSuccess.emit(true);
+
   }
 
 }

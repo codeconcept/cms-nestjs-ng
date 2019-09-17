@@ -1,3 +1,6 @@
 <div *ngIf="articles$" class="d-flex flex-column bd-highlight mb-3">
-  <app-article-summary *ngFor="let article of articles$ | async" [article]="article"></app-article-summary>
+  <app-article-summary
+    *ngFor="let article of articles$ | async"
+    [article]="article"
+    (deleteSuccess)="reloadArticles($event)"></app-article-summary>
 </div>
